@@ -63,7 +63,7 @@ class quadraticBezier:
     def draw(self, showGrid = False, showArrows = False):
         fig = plt.figure()
         ax = fig.add_subplot(111)
-        
+        plt.axis('equal')
         # Define the cartesian space
         x = [self.maxX, self.minX]
         y = [self.minY, self.maxY]
