@@ -92,6 +92,6 @@ class BezierCurve():
                 x2 = self.xControl[i+1] - x1
                 y2 = self.yControl[i+1] - y1
                 #print('arrows (', x1, ',', y1,') to (', x2, ',', y2,') \n')
-                plt.arrow(x1, y1, x2,  y2, length_includes_head = True, head_width = 1)
+                plt.arrow(x1, y1, x2,  y2, length_includes_head = True, head_width = len(self.xControl)-2)
         plt.show()
 
