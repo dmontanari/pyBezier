@@ -15,6 +15,10 @@ class quadraticBezier:
     bezierPointsX = list()
     bezierPointsY = list()
     pointSize = 0.2
+    minX = 0
+    minY = 0
+    maxX = 0
+    maxY = 0
     def __init__(self, minX=0, minY=0, maxX=0, maxY=0):
         self.minX = minX
         self.maxX = maxX
