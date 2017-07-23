@@ -5,10 +5,9 @@ Created on Fri Jul 21 19:36:07 2017
 @author: Montanari, Daniel (dmontanari@gmail.com)
 """
 
-from pylab import *
+from pylab import plot
 import matplotlib.pyplot as plt
 import numpy as np
-import math
 from scipy import special
 
 from quadraticBezier import quadraticBezier as quadBezier
@@ -47,32 +46,19 @@ class cubicBezier(quadBezier):
             pX = pX + coef * x**(expX) * t ** i * controlX[expA]
             pY = pY + coef * x**(expX) * t ** i * controlY[expA]
         return (pX, pY)
-    
-        #f = math.factorial(n)
-
-
-
-    def __calculateCubicBezier(self, controlX, controlY, t):
-        # Calculate point X and Y for current t
-        pX = ((1-t)**3)*controlX[0] + 3*t*(1-t)**2*controlX[1] + 3*(t**2)*(1-t)*controlX[2] + (t**3)*controlX[3]
-        pY = ((1-t)**3)*controlY[0] + 3*t*(1-t)**2*controlY[1] + 3*(t**2)*(1-t)*controlY[2] + (t**3)*controlY[3]
-        
-        return (pX, pY)
 
     def draw(self, showGrid = False, showArrows = False):
-        fig = plt.figure()
-        #ax = fig.add_subplot(111)
+        #fig = plt.figure()
         plt.axis('equal')
-        # Define the cartesian space
         x = [self.maxX, self.minX]
         y = [self.minY, self.maxY]
         [ plot( [dot_x,dot_x] ,[0,dot_y], '-', linewidth = 1, c='k' ) for dot_x,dot_y in zip(x,y) ] 
         [ plot( [0,dot_x] ,[dot_y,dot_y], '-', linewidth = 1, c='k' ) for dot_x,dot_y in zip(x,y) ]
-        scatter(self.xControl, self.yControl, c='r')
-        scatter(self.bezierPointsX, self.bezierPointsY, c='b', s=self.pointSize)
+        plt.scatter(self.xControl, self.yControl, c='r')
+        plt.scatter(self.bezierPointsX, self.bezierPointsY, c='b', s=self.pointSize)
 
         if showGrid is True:
-            grid()
+            plt.grid()
 
         if showArrows is True:
             n = len(self.xControl)
@@ -82,6 +68,6 @@ class cubicBezier(quadBezier):
                 x2 = self.xControl[i+1] - x1
                 y2 = self.yControl[i+1] - y1
                 #print('arrows (', x1, ',', y1,') to (', x2, ',', y2,') \n')
-                arrow(x1, y1, x2,  y2, length_includes_head = True, head_width = 0.50)
-        show()
+                plt.arrow(x1, y1, x2,  y2, length_includes_head = True, head_width = 1)
+        plt.show()
 
