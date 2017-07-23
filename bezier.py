@@ -78,10 +78,6 @@ class BezierCurve():
     def draw(self, showGrid = False, showArrows = False):
         #fig = plt.figure()
         plt.axis('equal')
-        x = [self.maxX, self.minX]
-        y = [self.minY, self.maxY]
-        [ plot( [dot_x,dot_x] ,[0,dot_y], '-', linewidth = 1, c='k' ) for dot_x,dot_y in zip(x,y) ] 
-        [ plot( [0,dot_x] ,[dot_y,dot_y], '-', linewidth = 1, c='k' ) for dot_x,dot_y in zip(x,y) ]
         plt.scatter(self.xControl, self.yControl, c='r')
         plt.scatter(self.bezierPointsX, self.bezierPointsY, c='b', s=self.pointSize)
 
