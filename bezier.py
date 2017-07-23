@@ -10,14 +10,38 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import special
 
-from quadraticBezier import quadraticBezier as quadBezier
-
-class cubicBezier(quadBezier):
+class BezierCurve():
+    tDivisor        = 0.1
+    bezierPointsX   = list()
+    bezierPointsY   = list()
+    pointSize       = 0.2
+    minX            = 0
+    minY            = 0
+    maxX            = 0
+    maxY            = 0
     def __init__(self, minX=0, minY=0, maxX=0, maxY=0):
         self.minX = minX
         self.maxX = maxX
         self.minY = minY
         self.maxY = maxY
+    
+    def setControlPoints(self, controlX, controlY):
+        self.xControl = controlX
+        self.yControl = controlY
+        for x in controlX:
+            if (x > self.maxX):
+                self.maxX
+            if ( x < self.minX):
+                self.minX = x;
+        for y in controlY:
+            if (y > self.maxY):
+                self.maxY = y;
+            if (y < self.minY):
+                self.minY = y;
+    
+    def setDeltaT(self, tDivisor):
+        self.tDivisor = tDivisor
+
     
     def generateBezierCurve(self):
         deltaT = np.arange(0, 1, self.tDivisor)
@@ -46,6 +70,10 @@ class cubicBezier(quadBezier):
             pX = pX + coef * x**(expX) * t ** i * controlX[expA]
             pY = pY + coef * x**(expX) * t ** i * controlY[expA]
         return (pX, pY)
+
+    def definePointSize(self, pSize):
+        self.pointSize = pSize
+
 
     def draw(self, showGrid = False, showArrows = False):
         #fig = plt.figure()
