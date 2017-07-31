@@ -7,7 +7,7 @@ Created on Thu Jul 20 17:09:14 2017
 
 #import quadraticBezier as Bezier
 
-from bezier import cubicBezier as Bezier
+from bezier import BezierCurve as Bezier
 
 #bezier = Bezier.quadraticBezier(0, 0, 50, 50)
 bezier = Bezier()
