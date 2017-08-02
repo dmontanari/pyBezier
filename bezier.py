@@ -5,12 +5,34 @@ Created on Fri Jul 21 19:36:07 2017
 @author: Montanari, Daniel (dmontanari@gmail.com)
 """
 
-from pylab import plot
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import special
 
 class BezierCurve():
+    """
+    BezierCurve
+    -----------
+    Provides:
+        * Calculation of S-PLine points
+        * Draw the curve
+    
+    Example
+    -------
+    >>> from bezier import BezierCurve as Bezier
+    >>> bezier = Bezier()
+    >>> xControl = [0 ,  25, 50, 75]
+    >>> yControl = [0 ,  10, -8, -35]
+    >>> bezier.setControlPoints(xControl, yControl)
+    >>> bezier.setDeltaT(0.002)
+    >>> bezier.generateBezierCurve()
+    >>> bezier.draw(showGrid = True, showArrows=True)
+     
+    Wikipedia
+    ---------
+    https://en.wikipedia.org/wiki/B%C3%A9zier_curve
+
+    """
     tDivisor        = 0.1
     bezierPointsX   = list()
     bezierPointsY   = list()
@@ -26,6 +48,22 @@ class BezierCurve():
         self.maxY = maxY
     
     def setControlPoints(self, controlX, controlY):
+        """
+        Define the control points
+        
+        Parameters:
+        -----------
+            controlX : Array with X coordinate for the control points
+            
+            controlY : Array with Y coordinate for the control points
+       
+        
+        Examples
+        ---------
+            >>> xControl = [0 ,  25, 50, 75]
+            >>> yControl = [0 ,  10, -8, -35]
+            >>> bezier.setControlPoints(xControl, yControl)
+        """
         self.xControl = controlX
         self.yControl = controlY
         for x in controlX:
@@ -42,6 +80,8 @@ class BezierCurve():
     def setDeltaT(self, tDivisor):
         self.tDivisor = tDivisor
 
+    def getSPlinePoints(self):
+        return (self.bezierPointsX, self.bezierPointsY)
     
     def generateBezierCurve(self):
         deltaT = np.arange(0, 1, self.tDivisor)
